@@ -182,6 +182,16 @@ impl UnsafeBuffer {
         Ok(Arc::new(buffer))
     }
 
+    pub fn from_raw_parts(handle: ash::vk::Buffer, device: Arc<Device>, size: DeviceSize, usage: BufferUsage) -> Arc<UnsafeBuffer> {
+        return Arc::new(UnsafeBuffer{
+            handle,
+            device,
+            size,
+            usage,
+            state: Mutex::new(BufferState::new(size)),
+        });
+    }
+
     /// Returns the memory requirements for this buffer.
     pub fn memory_requirements(&self) -> MemoryRequirements {
         #[inline]

@@ -112,6 +112,9 @@ pub mod immutable;
 pub mod sys;
 pub mod view;
 
+#[cfg(feature = "vma")]
+pub mod vma;
+
 mod slice;
 mod traits;
 mod usage;
